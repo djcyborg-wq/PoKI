@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>RKI Chat Test</title>
+</head>
+<body>
+    <h1>Test</h1>
+    <button id="testBtn">Test API</button>
+    <pre id="output"></pre>
+    <script src="app.js"></script>
+    <script>
+        document.getElementById('testBtn').addEventListener('click', async () => {
+            const output = document.getElementById('output');
+            try {
+                output.textContent = 'Testing /api/stats...';
+                const res = await fetch('/api/stats');
+                const data = await res.json();
+                output.textContent = JSON.stringify(data, null, 2);
+            } catch (e) {
+                output.textContent = 'Error: ' + e;
+            }
+        });
+    </script>
+</body>
+</html>

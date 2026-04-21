@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PoKI - Private KI Dokumentassistent</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>PoKI</h1>
+            <div class="status-bar">
+                <span id="status-indicator" class="status-indicator status-unknown"></span>
+                <span id="status-text">Prüfe System...</span>
+            </div>
+        </header>
+
+        <div class="main-content">
+            <div class="chat-section">
+                <div id="chat-history" class="chat-history"></div>
+                
+                <div class="chat-input-area">
+                    <div class="folder-filter">
+                        <label>Ordner filtern:</label>
+                        <div id="folder-checkboxes" class="folder-checkboxes"></div>
+                    </div>
+                    
+                    <div class="input-row">
+                        <input 
+                            type="text" 
+                            id="question-input" 
+                            placeholder="Stelle eine Frage zu den Dokumenten..."
+                            autocomplete="off"
+                        >
+                        <button id="send-btn" class="btn btn-primary">Senden</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sidebar">
+                <div class="stats-section">
+                    <h2>Statistik</h2>
+                    <div id="stats-display" class="stats-display">
+                        <p>Lade Statistiken...</p>
+                    </div>
+                </div>
+
+                <div class="folders-section">
+                    <h2>Dokumenten-Ordner</h2>
+                    <div id="folders-list" class="folders-list"></div>
+                </div>
+
+                <div class="actions-section">
+                    <button id="reindex-btn" class="btn btn-secondary">Neu Indizieren</button>
+                    <button id="refresh-stats-btn" class="btn btn-secondary">Aktualisieren</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="loading-overlay" class="loading-overlay hidden">
+        <div class="loading-spinner"></div>
+        <p id="loading-text">Laden...</p>
+    </div>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>
