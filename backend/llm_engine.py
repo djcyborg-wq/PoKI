@@ -60,7 +60,7 @@ class LLMEngine:
             response = requests.post(
                 self._chat_url,
                 json=payload,
-                timeout=120
+                timeout=settings.ollama_timeout
             )
             response.raise_for_status()
             

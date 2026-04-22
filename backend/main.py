@@ -160,7 +160,7 @@ async def chat(request: ChatRequest):
         
         meta = result.get('metadata', {})
         sources.append({
-            "file": meta.get('filename', 'Unknown'),
+            "file": meta.get('source_path', meta.get('filename', 'Unknown')),
             "folder": meta.get('folder_source', 'Unknown'),
             "snippet": result['content'][:200] + "..." if len(result['content']) > 200 else result['content']
         })

@@ -28,6 +28,7 @@ class AppSettings(BaseSettings):
     ollama_base_url: str = Field(default="http://localhost:11434", alias="OLLAMA_BASE_URL")
     ollama_model: str = Field(default="qwen2.5:3b", alias="OLLAMA_MODEL")
     ollama_embedding_model: str = Field(default="all-MiniLM-L6-v2", alias="OLLAMA_EMBEDDING_MODEL")
+    ollama_timeout: int = Field(default=300, alias="OLLAMA_TIMEOUT")
     
     document_folders: str = Field(default=r"E:\Mario@work\RKI", alias="DOCUMENT_FOLDERS")
     
