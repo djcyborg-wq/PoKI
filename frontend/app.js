@@ -195,12 +195,15 @@ class DocumentChatApp {
             html += `
                 <div class="sources">
                     <h4>Quellen:</h4>
-                    ${sources.map(s => `
+                    ${sources.map(s => {
+                        const fileUrl = 'file:///' + s.file.replace(/\\/g, '/');
+                        return `
                         <div class="source-item">
-                            <strong>${s.file}</strong> (${s.folder})
+                            <a href="${fileUrl}" target="_blank" class="source-link">${s.file}</a>
+                            <span class="source-folder">(${s.folder})</span>
                             <br><small>${this.escapeHtml(s.snippet)}</small>
                         </div>
-                    `).join('')}
+                    `}).join('')}
                 </div>
             `;
         }

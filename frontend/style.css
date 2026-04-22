@@ -133,6 +133,21 @@ header h1 {
     word-break: break-word;
 }
 
+.source-link {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.source-link:hover {
+    text-decoration: underline;
+}
+
+.source-folder {
+    color: var(--text-secondary);
+    font-size: 0.7rem;
+}
+
 .source-item strong {
     color: var(--primary-color);
 }
