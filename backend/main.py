@@ -32,7 +32,7 @@ logger = logging.getLogger(__name__)
 class ChatRequest(BaseModel):
     question: str
     history: Optional[List[Dict[str, str]]] = None
-    top_k: int = Field(default=5, ge=1, le=20)
+    top_k: int = Field(default=10, ge=1, le=20)
     folders: Optional[List[str]] = None
 
 
@@ -116,6 +116,7 @@ async def health_check():
     return {
         "status": "ok" if (ollama_ok and store_ok) else "degraded",
         "ollama": "connected" if ollama_ok else "unavailable",
+        "model": llm.model,
         "vector_store": "ready" if store_ok else "error"
     }
 
@@ -326,6 +327,9 @@ def _do_reindex():
         store = get_vector_store()
         store.initialize()
         store.clear_all()
+        
+        # Wichtig: Nach clear_all() neu initialisieren
+        store.initialize()
         
         db = get_metadata_db()
         db.clear_all()

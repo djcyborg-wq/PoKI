@@ -55,7 +55,7 @@ class DocumentChatApp {
             
             this.updateStatus(
                 data.ollama === 'connected' ? 'connected' : 'unavailable',
-                `Ollama: ${data.ollama}`
+                `Ollama: ${data.ollama} | ${data.model || 'unknown'}`
             );
         } catch (error) {
             this.updateStatus('unavailable', 'Systemfehler');
@@ -91,7 +91,7 @@ class DocumentChatApp {
     renderFolderCheckboxes() {
         this.elements.folderCheckboxes.innerHTML = this.allFolders.map(folder => `
             <label class="folder-checkbox">
-                <input type="checkbox" value="${folder.id}" data-folder-id="${folder.id}">
+                <input type="checkbox" value="${folder.path}" data-folder-path="${folder.path}">
                 ${folder.name}
             </label>
         `).join('');
@@ -161,7 +161,7 @@ class DocumentChatApp {
                 body: JSON.stringify({
                     question: question,
                     history: [],
-                    top_k: 5,
+                    top_k: 10,
                     folders: this.selectedFolders.length > 0 ? this.selectedFolders : null
                 })
             });

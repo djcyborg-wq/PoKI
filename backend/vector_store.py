@@ -24,9 +24,6 @@ class VectorStore:
         self._embedding_processor = None
     
     def initialize(self):
-        if self.client is not None:
-            return
-        
         if self.store_type == "chroma":
             self._init_chroma()
         elif self.store_type == "faiss":
@@ -114,12 +111,15 @@ class VectorStore:
         
         where_clause = None
         if folder_filter:
-            where_clause = {
-                "$or": [
-                    {"folder_source": {"$eq": folder}}
-                    for folder in folder_filter
-                ]
-            }
+            if len(folder_filter) == 1:
+                where_clause = {"folder_source": {"$eq": folder_filter[0]}}
+            else:
+                where_clause = {
+                    "$or": [
+                        {"folder_source": {"$eq": folder}}
+                        for folder in folder_filter
+                    ]
+                }
         
         results = self.collection.query(
             query_embeddings=[query_embedding],
@@ -158,7 +158,11 @@ class VectorStore:
     
     def clear_all(self) -> None:
         if self.client is not None:
-            self.client.reset()
+            try:
+                self.client.delete_collection("documents")
+            except:
+                pass
+            self.collection = None
             logger.info("Cleared all documents from vector store")
     
     def get_stats(self) -> Dict[str, Any]:
