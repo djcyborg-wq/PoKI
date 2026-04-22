@@ -58,6 +58,7 @@ python -m backend.main
 OLLAMA_BASE_URL=http://localhost:11434
 OLLAMA_MODEL=qwen2.5:3b
 OLLAMA_EMBEDDING_MODEL=all-MiniLM-L6-v2
+OLLAMA_TIMEOUT=300
 
 # Dokumenten-Ordner (kommasepariert)
 DOCUMENT_FOLDERS=E:\Dokumente,R:\Archiv
@@ -68,6 +69,7 @@ VECTOR_STORE_PATH=./data/chroma_db
 # Text Processing
 CHUNK_SIZE=1000
 CHUNK_OVERLAP=200
+EMBEDDING_BATCH_SIZE=32
 
 # OCR (optional)
 TESSERACT_CMD=C:\Program Files\Tesseract-OCR\tesseract.exe
